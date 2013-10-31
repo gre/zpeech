@@ -19,17 +19,16 @@ Spectrum.prototype.render = function (formants) {
 
   var freqw = Math.round(W / lengthSpectrum); // We can afford to lose some high freq viz...
   var freqborder = Math.floor(freqw / 5);
+  var w = freqw-freqborder;
+  ctx.fillStyle = this.color;
   for (var i=0; i<lengthSpectrum; ++i) {
     var value = arraySpectrum[i];
-    var x = i*freqw;
-    var w = freqw-freqborder;
-    ctx.fillStyle = this.color;
+    var x = Math.floor(i*freqw);
     ctx.fillRect(x,H-(H*value/256),w,H);
   }
 
   ctx.fillStyle = "#f00";
   formants.forEach(function (f) {
-    console.log(f);
     ctx.fillRect(f * freqw, 0, 1, H);
   });
 }

@@ -1,3 +1,5 @@
+var SAMPLES = 1024;
+var REFRESH_RATE = 50;
 
 var AudioContext = require("audiocontext");
 var _ = require("lodash");
@@ -13,15 +15,14 @@ if (!AudioContext) {
 
 var ctx = new AudioContext();
 var analyzer = ctx.createAnalyser();
-var maybeMicrophone = getMicrophone(ctx).then(function (mic) {
+var maybeMicrophone = getMicrophone(ctx, 1.5).then(function (mic) {
   mic.connect(analyzer);
   return mic;
 });
 
-var SAMPLES = 1024;
 
 var array = new Uint8Array(SAMPLES);
-analyzer.smoothingTimeConstant = 0.6;
+analyzer.smoothingTimeConstant = 0.7;
 analyzer.fftSize = SAMPLES * 2;
 
 function indexToFrequency (i) {
@@ -45,7 +46,7 @@ maybeMicrophone.then(function(mic){
     else {
       $vowel.className = "hidden";
     }
-  }, 100);
+  }, REFRESH_RATE);
 });
 
 (function(canvas) {
