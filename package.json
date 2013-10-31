@@ -18,7 +18,8 @@
     "url": "git://github.com/gre/zpeech.git"
   },
   "dependencies": {
-
+    "audiocontext": "0.1.0",
+    "q": "0.9.7"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
