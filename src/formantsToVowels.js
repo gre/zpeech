@@ -5,8 +5,12 @@ function log () {
   console.log.apply(console, arguments);
 }
 
-function formantsToVowels (params, formants) {
+function formantsToVowels (formants, f1Params, f2Params) {
   var formantsFreq = _.pluck(formants, "freq");
+  var params = {};
+  _.each(f1Params, function (f1, v) {
+    params[v] = [ f1Params[v], f2Params[v] ];
+  });
   var distances = _.map(params, function (f, vowel) {
     var formantDistance = _(f).zip(formantsFreq)
      .map(function (tuple) {
@@ -32,7 +36,7 @@ function formantsToVowels (params, formants) {
 
   return _(probabilities)
     .filter(function (p) {
-      return p[1] > 0.9;
+      return p[1] > 0.8;
     })
     .take(3)
     .value();

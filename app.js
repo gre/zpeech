@@ -35,17 +35,24 @@ function valueToPercent (value) {
 
 var formantsParams = {
   i: [250, 2250],
-  e: [420, 2050],
-  ɛ: [590, 1770],
+  //e: [420, 2050],
+  //ɛ: [590, 1770],
   u: [290, 750],
   a: [760, 1450],
   o: [360, 770],
-  ɔ: [520, 1070],
-  y: [250, 1750],
-  ø: [350, 1350],
+  //ɔ: [520, 1070],
+  //y: [250, 1750],
+  //ø: [350, 1350],
   œ: [500, 1330],
-  ə: [570, 1560]
+  //ə: [570, 1560]
 };
+
+var f1Params = {};
+var f2Params = {};
+_.each(formantsParams, function (f, v) {
+  f1Params[v] = f[0];
+  f2Params[v] = f[1];
+});
 
 var formants = [];
 var $vowel_container = document.getElementById("vowel");
@@ -55,11 +62,17 @@ var $vowels = _.map(_.range(0, 3), function (i) {
   $vowel_container.appendChild(node);
   return node;
 });
+
+var $f1 = document.getElementById("f1");
+var $f2 = document.getElementById("f2");
+
 maybeMicrophone.then(function(mic){
   setInterval(function(){
     analyzer.getByteFrequencyData(array);
     formants = extractFormants(array, indexToFrequency, valueToPercent);
-    var vowels = formantsToVowels(formantsParams, formants);
+    $f1.textContent = Math.round(formants[0].freq);
+    $f2.textContent = Math.round(formants[1].freq);
+    var vowels = formantsToVowels(formants, f1Params, f2Params);
     _.each($vowels, function ($vowel, i) {
       var vowel = vowels[i];
       if (vowel) {
@@ -89,3 +102,8 @@ maybeMicrophone.then(function(mic){
 
 
 var gui = new dat.GUI();
+
+_.each(f1Params, function (f, v) {
+  gui.add(f1Params, v, 0, 4000);
+  gui.add(f2Params, v, 0, 4000);
+});

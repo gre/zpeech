@@ -22,3 +22,8 @@
   font-size: 2em;
   color: #f99;
 }
+
+#formants > span {
+  margin: 10px 20px;
+  color: #00F;
+}
