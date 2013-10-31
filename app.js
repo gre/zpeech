@@ -13,7 +13,7 @@ if (!AudioContext) {
 
 var ctx = new AudioContext();
 var analyzer = ctx.createAnalyser();
-var maybeMicrophone = getMicrophone(ctx, 1.0).then(function (mic) {
+var maybeMicrophone = getMicrophone(ctx).then(function (mic) {
   mic.connect(analyzer);
   return mic;
 });
@@ -21,7 +21,7 @@ var maybeMicrophone = getMicrophone(ctx, 1.0).then(function (mic) {
 var SAMPLES = 1024;
 
 var array = new Uint8Array(SAMPLES);
-analyzer.smoothingTimeConstant = 0.1;
+analyzer.smoothingTimeConstant = 0.6;
 analyzer.fftSize = SAMPLES * 2;
 
 function indexToFrequency (i) {
