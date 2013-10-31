@@ -16,18 +16,23 @@ body {
 #vowel .vowel:nth-child(1) {
   font-size: 10em;
   font-weight: bold;
-  color: #f00;
+  color: #00B5AD;
 }
 #vowel .vowel:nth-child(2) {
   font-size: 5em;
-  color: #f33;
+  color: #D95C5C;
 }
 #vowel .vowel:nth-child(3) {
   font-size: 2em;
-  color: #f99;
+  color: #D95C5C;
+}
+
+#formants {
+  left: 140px;
+  position: absolute;
 }
 
 #formants > span {
   margin: 10px 20px;
-  color: #00F;
+  color: #D95C5C;
 }
