@@ -4,7 +4,8 @@ function extractFormants (frequenciesBuffer, indexToFrequency, valueToPercent) {
   var size = frequenciesBuffer.length;
   var f1, f2;
   var maxf1 = -Infinity, maxf2 = -Infinity;
-  var sma = simple_moving_averager(4);
+  var period = 16;
+  var sma = simple_moving_averager(period);
 
   _.each(frequenciesBuffer, function (value, i) {
     var freq = indexToFrequency(i);

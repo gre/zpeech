@@ -7,6 +7,8 @@ body {
 }
 .vowel {
   display: block;
+  line-height: 0.9em;
+  font-weight: bold;
 }
 .vowel.hidden {
   opacity: 0;
@@ -15,7 +17,6 @@ body {
 
 #vowel .vowel:nth-child(1) {
   font-size: 10em;
-  font-weight: bold;
   color: #00B5AD;
 }
 #vowel .vowel:nth-child(2) {

@@ -4,6 +4,7 @@ var REFRESH_RATE = 50;
 var AudioContext = require("audiocontext");
 var _ = require("lodash");
 var dat = require("dat-gui");
+var Qajax = require("qajax");
 var formantsToVowels = require("./src/formantsToVowels");
 var extractFormants = require("./src/extractFormants");
 var getMicrophone = require("./src/getMicrophone");
@@ -33,19 +34,16 @@ function valueToPercent (value) {
   return value / 256;;
 }
 
-var formantsParams = {
-  i: [250, 2250],
-  //e: [420, 2050],
-  //ɛ: [590, 1770],
-  u: [290, 750],
-  a: [760, 1450],
-  o: [360, 770],
-  //ɔ: [520, 1070],
-  //y: [250, 1750],
-  //ø: [350, 1350],
-  œ: [500, 1330],
-  //ə: [570, 1560]
+var greFormants = {
+  i: [100, 3379],
+  e: [430, 2336],
+  u: [200, 1500],
+  a: [827, 1542],
+  o: [562, 3577],
+  œ: [695, 1840]
 };
+
+var formantsParams = greFormants;
 
 var f1Params = {};
 var f2Params = {};
@@ -66,6 +64,11 @@ var $vowels = _.map(_.range(0, 3), function (i) {
 var $f1 = document.getElementById("f1");
 var $f2 = document.getElementById("f2");
 
+var sendLetter = 
+  _.throttle(function(l){
+    return Qajax("http://10.0.25.2:9000/letter?q="+l);
+  }, 100);
+
 maybeMicrophone.then(function(mic){
   setInterval(function(){
     analyzer.getByteFrequencyData(array);
@@ -73,6 +76,7 @@ maybeMicrophone.then(function(mic){
     $f1.textContent = "~"+Math.round(formants[0].freq);
     $f2.textContent = "~"+Math.round(formants[1].freq);
     var vowels = formantsToVowels(formants, f1Params, f2Params);
+    if (vowels[0]) sendLetter(vowels[0][0]);
     _.each($vowels, function ($vowel, i) {
       var vowel = vowels[i];
       if (vowel) {
@@ -103,7 +107,13 @@ maybeMicrophone.then(function(mic){
 
 var gui = new dat.GUI();
 
+var folder;
+folder = gui.addFolder('f1');
 _.each(f1Params, function (f, v) {
-  gui.add(f1Params, v, 0, 4000);
-  gui.add(f2Params, v, 0, 4000);
+  folder.add(f1Params, v, 0, 3000);
+});
+
+folder = gui.addFolder('f2');
+_.each(f2Params, function (f, v) {
+  folder.add(f2Params, v, 500, 5000);
 });

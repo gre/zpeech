@@ -21,7 +21,8 @@
     "audiocontext": "0.1.0",
     "q": "0.9.7",
     "lodash": "2.2.1",
-    "dat-gui": "0.5.0"
+    "dat-gui": "0.5.0",
+    "qajax": "0.1.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

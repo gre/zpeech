@@ -7,6 +7,9 @@ function log () {
 
 function formantsToVowels (formants, f1Params, f2Params) {
   var formantsFreq = _.pluck(formants, "freq");
+
+  if (formants[0].db<0.7 && formants[1].db<0.6) return [];
+
   var params = {};
   _.each(f1Params, function (f1, v) {
     params[v] = [ f1Params[v], f2Params[v] ];
@@ -36,7 +39,7 @@ function formantsToVowels (formants, f1Params, f2Params) {
 
   return _(probabilities)
     .filter(function (p) {
-      return p[1] > 0.8;
+      return p[1] > 0.9;
     })
     .take(3)
     .value();
