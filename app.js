@@ -70,8 +70,8 @@ maybeMicrophone.then(function(mic){
   setInterval(function(){
     analyzer.getByteFrequencyData(array);
     formants = extractFormants(array, indexToFrequency, valueToPercent);
-    $f1.textContent = Math.round(formants[0].freq);
-    $f2.textContent = Math.round(formants[1].freq);
+    $f1.textContent = "~"+Math.round(formants[0].freq);
+    $f2.textContent = "~"+Math.round(formants[1].freq);
     var vowels = formantsToVowels(formants, f1Params, f2Params);
     _.each($vowels, function ($vowel, i) {
       var vowel = vowels[i];
