@@ -1,5 +1,7 @@
 function formantsToVowel (f1, f2, f3) {
   if (f1.freq < 200) return null;
+  if (f1.db < 0.6 && f2.db < 0.6) return null;
+
   if (f2.db > 0.5*f1.db) {
     if (f1.freq > 200 && f1.freq < 400 && 
         f2.freq > 3000 && f2.freq < 3500) {

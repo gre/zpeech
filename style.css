@@ -6,5 +6,6 @@
   font-size: 10em;
 }
 #vowel.hidden {
-  opacity: 0.1;
+  opacity: 0;
+  transition: 0.2s;
 }

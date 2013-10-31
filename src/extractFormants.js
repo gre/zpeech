@@ -7,7 +7,7 @@ function extractFormants (frequenciesBuffer, indexToFrequency, valueToPercent) {
   _.each(frequenciesBuffer, function (value, i) {
     var freq = indexToFrequency(i);
     var db = valueToPercent(value);
-    if (freq < 1200) {
+    if (freq < 1500) {
       if (db > maxf1) {
         maxf1 = db;
         f1 = freq;
