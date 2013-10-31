@@ -20,7 +20,8 @@
   "dependencies": {
     "audiocontext": "0.1.0",
     "q": "0.9.7",
-    "lodash": "2.2.1"
+    "lodash": "2.2.1",
+    "dat-gui": "0.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

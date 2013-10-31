@@ -1,12 +1,24 @@
 #wrapper {
   text-align: center;
 }
-#vowel {
-  font-size: 10em;
-  font-weight: bold;
-  color: red;
+.vowel {
+  display: block;
 }
-#vowel.hidden {
+.vowel.hidden {
   opacity: 0;
   transition: 0.2s;
+}
+
+#vowel .vowel:nth-child(1) {
+  font-size: 10em;
+  font-weight: bold;
+  color: #f00;
+}
+#vowel .vowel:nth-child(2) {
+  font-size: 5em;
+  color: #f33;
+}
+#vowel .vowel:nth-child(3) {
+  font-size: 2em;
+  color: #f99;
 }

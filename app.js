@@ -3,7 +3,8 @@ var REFRESH_RATE = 50;
 
 var AudioContext = require("audiocontext");
 var _ = require("lodash");
-var formantsToVowel = require("./src/formantsToVowel");
+var dat = require("dat-gui");
+var formantsToVowels = require("./src/formantsToVowels");
 var extractFormants = require("./src/extractFormants");
 var getMicrophone = require("./src/getMicrophone");
 var Spectrum = require("./src/spectrum");
@@ -32,20 +33,43 @@ function valueToPercent (value) {
   return value / 256;;
 }
 
+var formantsParams = {
+  i: [250, 2250],
+  e: [420, 2050],
+  ɛ: [590, 1770],
+  u: [290, 750],
+  a: [760, 1450],
+  o: [360, 770],
+  ɔ: [520, 1070],
+  y: [250, 1750],
+  ø: [350, 1350],
+  œ: [500, 1330],
+  ə: [570, 1560]
+};
+
 var formants = [];
-var $vowel = document.getElementById("vowel");
+var $vowel_container = document.getElementById("vowel");
+var $vowels = _.map(_.range(0, 3), function (i) {
+  var node = document.createElement("span");
+  node.className = "vowel";
+  $vowel_container.appendChild(node);
+  return node;
+});
 maybeMicrophone.then(function(mic){
   setInterval(function(){
     analyzer.getByteFrequencyData(array);
     formants = extractFormants(array, indexToFrequency, valueToPercent);
-    var vowel = formantsToVowel.apply(this, formants);
-    if (vowel) {
-      $vowel.innerHTML = vowel;
-      $vowel.className = "";
-    }
-    else {
-      $vowel.className = "hidden";
-    }
+    var vowels = formantsToVowels(formantsParams, formants);
+    _.each($vowels, function ($vowel, i) {
+      var vowel = vowels[i];
+      if (vowel) {
+        $vowel.textContent = vowel[0];
+        $vowel.classList.remove("hidden");
+      }
+      else {
+        $vowel.classList.add("hidden");
+      }
+    });
   }, REFRESH_RATE);
 });
 
@@ -62,3 +86,6 @@ maybeMicrophone.then(function(mic){
   }
   maybeMicrophone.then(loop);
 }(document.getElementById("frequencies")));
+
+
+var gui = new dat.GUI();
