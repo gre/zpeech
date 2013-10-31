@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "audiocontext": "0.1.0",
-    "q": "0.9.7"
+    "q": "0.9.7",
+    "lodash": "2.2.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

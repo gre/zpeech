@@ -22,8 +22,24 @@ var array = new Uint8Array(SAMPLES);
 analyzer.smoothingTimeConstant = 0.1;
 analyzer.fftSize = SAMPLES * 2;
 
-setInterval(function(){
-  analyzer.getByteFrequencyData(array);
-  console.log(formantsToVowel.apply(this, extractFormants(array)));
-}, 1000);
+function indexToFrequency (i) {
+  return i * ctx.sampleRate / analyzer.fftSize;
+}
+function valueToPercent (value) {
+  return value / 256;;
+}
 
+var $vowel = document.getElementById("vowel");
+maybeMicrophone.then(function(mic){
+  setInterval(function(){
+    analyzer.getByteFrequencyData(array);
+    var formants = extractFormants(array, indexToFrequency, valueToPercent);
+    var vowel = formantsToVowel.apply(this, formants);
+    if (vowel) {
+      $vowel.innerHTML = vowel;
+    }
+    else {
+      $vowel.innerHTML = "";
+    }
+  }, 100);
+});
