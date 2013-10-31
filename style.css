@@ -1,4 +1,10 @@
+#wrapper {
+  text-align: center;
+}
 #vowel {
   margin: 10px;
-  font-size: 5em;
+  font-size: 10em;
+}
+#vowel.hidden {
+  opacity: 0.1;
 }
