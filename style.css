@@ -2,10 +2,6 @@ body {
   font-family: 'Underdog', cursive;
 }
 
-#title, .description {
-  font-family: 'Underdog', cursive;
-}
-
 #wrapper {
   text-align: center;
 }
