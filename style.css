@@ -2,8 +2,9 @@
   text-align: center;
 }
 #vowel {
-  margin: 10px;
   font-size: 10em;
+  font-weight: bold;
+  color: red;
 }
 #vowel.hidden {
   opacity: 0;
