@@ -2,8 +2,8 @@
 function Spectrum (ctx, array) {
   this.ctx = ctx;
   this.array = array;
-  this.bg = "#999";
-  this.color = "#000";
+  this.bg = "#fff";
+  this.color = "#6ECFF5";
 }
 
 Spectrum.prototype.render = function (formants) {
@@ -27,7 +27,7 @@ Spectrum.prototype.render = function (formants) {
     ctx.fillRect(x,H-(H*value/256),w,H);
   }
 
-  ctx.fillStyle = "#f00";
+  ctx.fillStyle = "#CC181E";
   formants.forEach(function (f) {
     ctx.fillRect(f * freqw, 0, 1, H);
   });
