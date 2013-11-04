@@ -65,10 +65,10 @@ var $vowels = _.map(_.range(0, 3), function (i) {
 var $f1 = document.getElementById("f1");
 var $f2 = document.getElementById("f2");
 
-var sendLetter = 
+var sendLetter = function(){}/*
   _.throttle(function(l){
     return Qajax("http://10.0.25.2:9000/letter?q="+l);
-  }, 100);
+  }, 100);*/
 
 maybeMicrophone.then(function(mic){
   setInterval(function(){
