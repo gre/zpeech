@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>zpeech</title>
+  <link href='http://fonts.googleapis.com/css?family=Underdog' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="wrapper">
+<h1 id="title">zpeech</h1>
+<p class="description">ZPeech, vowel formant analysis experiment with Web Audio API</p>
+
+<canvas id="frequencies" width=1024 height=200></canvas>
+
+<div id="formants">
+  ƒ 1: <span id="f1"></span>
+  ƒ 2: <span id="f2"></span>
+</div>
+
+<div id="vowel"></div>
+  </div>
+
+<script id="live-reload" src="http://localhost:35729/livereload.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
